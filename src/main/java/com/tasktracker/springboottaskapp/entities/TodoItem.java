@@ -1,15 +1,15 @@
-package com.tasktracker.springboottaskapp.models;
+package com.tasktracker.springboottaskapp.entities;
+
+import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.persistence.*;
 import java.time.Instant;
 
-import static org.springframework.data.jpa.domain.AbstractAuditable_.createdDate;
-
 @Entity
-@Table(name = "TodoItem")
+@Table(name = "todo_item")
 public class TodoItem {
 
     @Id
@@ -20,6 +20,7 @@ public class TodoItem {
 
     @Getter
     @Setter
+    @NotBlank(message = "Description is required")
     private String description;
 
     @Getter
@@ -28,18 +29,30 @@ public class TodoItem {
 
     @Getter
     @Setter
-    private Instant createdData;
+    private Instant createdDate;
 
     @Getter
     @Setter
     private Instant modifiedDate;
+
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
 
     public TodoItem() {}
 
     public TodoItem(String description) {
         this.description = description;
         this.complete = false;
-        this.createdData = Instant.now();
+        this.createdDate = Instant.now();
         this.modifiedDate = Instant.now();
     }
 
@@ -48,5 +61,6 @@ public class TodoItem {
         return String.format("TodoItem{id=%d, description='%s', complete='%s', createdDate='%s', modifiedDate='%s'}",
                 id, description, complete, createdDate, modifiedDate);
     }
+
 
 }

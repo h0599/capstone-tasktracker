@@ -1,6 +1,6 @@
 package com.tasktracker.springboottaskapp.config;
 
-import com.tasktracker.springboottaskapp.models.TodoItem;
+import com.tasktracker.springboottaskapp.entities.TodoItem;
 import com.tasktracker.springboottaskapp.repositories.TodoItemRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
