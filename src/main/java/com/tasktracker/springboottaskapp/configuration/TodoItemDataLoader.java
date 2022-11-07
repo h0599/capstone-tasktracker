@@ -1,4 +1,4 @@
-package com.tasktracker.springboottaskapp.config;
+package com.tasktracker.springboottaskapp.configuration;
 
 import com.tasktracker.springboottaskapp.entities.TodoItem;
 import com.tasktracker.springboottaskapp.repositories.TodoItemRepository;

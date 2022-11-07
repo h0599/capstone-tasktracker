@@ -5,7 +5,7 @@ pField = form.querySelector(".password"),
 pInput = pField.querySelector("input");
 
 form.onsubmit = (e)=>{
-  e.preventDefault(); 
+  e.preventDefault();
   (eInput.value == "") ? eField.classList.add("shake", "error") : checkEmail();
   (pInput.value == "") ? pField.classList.add("shake", "error") : checkPass();
 
