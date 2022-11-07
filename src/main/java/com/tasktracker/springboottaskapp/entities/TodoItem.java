@@ -18,11 +18,11 @@ public class TodoItem {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(columnDefinition = "to-do")
     private String body;
 
     @ManyToOne
     @JsonBackReference
+    @JoinColumn(name="user_id")
     private User user;
 
     public TodoItem (TodoDto todoDto) {

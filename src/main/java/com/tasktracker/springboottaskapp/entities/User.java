@@ -1,5 +1,6 @@
 package com.tasktracker.springboottaskapp.entities;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.tasktracker.springboottaskapp.dtos.UserDto;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.AllArgsConstructor;
@@ -11,7 +12,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-@Table(name = "Users")
+@Table(name = "users")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -26,8 +27,8 @@ public class User {
     @Column
     private String password;
 
-    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY, cascade = {CascadeType.MERGE, CascadeType.PERSIST})
-    @JsonManagedReference
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JsonBackReference
     private Set<TodoItem> TodoSet = new HashSet<>();
 
     public User(UserDto userDto) {
