@@ -1,6 +1,5 @@
 package com.tasktracker.springboottaskapp.dtos;
 
-import com.tasktracker.springboottaskapp.entities.TodoDto;
 import com.tasktracker.springboottaskapp.entities.TodoItem;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -17,12 +16,12 @@ public class TodoDto implements Serializable {
     private UserDto userDto;
 
 
-    public TodoDto(TodoItem note){
-        if (TodoItem.getId() != null){
-            this.id = note.getId();
+    public TodoDto(TodoItem todoitem){
+        if (todoitem.getId() != null){
+            this.id = todoitem.getId();
         }
-        if (note.getBody() != null){
-            this.body = note.getBody();
+        if (todoitem.getBody() != null){
+            this.body = todoitem.getBody();
     }
 
     }

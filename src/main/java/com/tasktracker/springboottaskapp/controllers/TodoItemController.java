@@ -2,60 +2,40 @@
 
 package com.tasktracker.springboottaskapp.controllers;
 
-import com.tasktracker.springboottaskapp.entities.TodoItem;
-import com.tasktracker.springboottaskapp.repositories.TodoItemRepository;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import com.tasktracker.springboottaskapp.dtos.TodoDto;
+import com.tasktracker.springboottaskapp.services.TodoService;
+import org.apache.el.stream.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.bind.annotation.*;
 
-import javax.validation.Valid;
-import java.time.Instant;
+import java.util.List;
 
-@Controller
+@RestController
+@RequestMapping("http://localhost:8080/api/v1/users")
 public class TodoItemController {
-    private final Logger logger = LoggerFactory.getLogger(TodoItemController.class);
-
     @Autowired
-    private TodoItemRepository todoItemRepository;
+    private TodoService todoService;
 
-    @GetMapping("/")
-    public ModelAndView index() {
-        logger.debug("request to GET index");
-        ModelAndView modelAndView = new ModelAndView("index");
-        modelAndView.addObject("todoItems", todoItemRepository.findAll());
-        return modelAndView;
+    @GetMapping("/user/{userId}")
+    public List<TodoDto> getTodoItemByUser(@PathVariable Long userId){
+        return todoService.getAllTodoItemByUserId(userId);
     }
-    @PostMapping("/todo")
-    public String createTodoItem(@Valid TodoItem todoItem, BindingResult result, Model model) {
-        if (result.hasErrors()) {
-            return "add-todo-item";
-        }
-
-        todoItem.setCreatedDate(Instant.now());
-        todoItem.setModifiedDate(Instant.now());
-        todoItemRepository.save(todoItem);
-        return "redirect:/";
+    @PostMapping("/user/{userId}")
+    public void addTodoItem (TodoDto todoDto,Long userId){
+        todoService.addTodoItem(todoDto, userId);
     }
-
-    @PostMapping("/todo/{id}")
-    public String updateTodoItem(@PathVariable("id") long id, @Valid TodoItem todoItem, BindingResult result, Model model) {
-        if (result.hasErrors()) {
-            todoItem.setId(id);
-            return "update-todo-item";
-        }
-
-        todoItem.setModifiedDate(Instant.now());
-        todoItemRepository.save(todoItem);
-        return "redirect:/";
+    @DeleteMapping("/{todoId}")
+    public void deleteTodoItemId(@PathVariable Long todoId) {
+        todoService.deleteTodoItemById(todoId);
     }
+    @PutMapping ("/{todoId}")
+    public void updateTodoItem(@RequestBody TodoDto TodoDto) {
+        todoService.updateTodoItemById(TodoDto);
 
-}
+    }
+    @GetMapping ("/{todoId}")
+    public Optional<TodoDto> getTodoItemById (@PathVariable Long todoId){
+        return todoService.getTodoItemById(todoId);
+    }}
 
 

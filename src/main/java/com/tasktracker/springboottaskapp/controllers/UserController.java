@@ -2,10 +2,11 @@ package com.tasktracker.springboottaskapp.controllers;
 
 
 import com.tasktracker.springboottaskapp.dtos.UserDto;
-import com.tasktracker.springboottaskapp.UserService;
+import com.tasktracker.springboottaskapp.services.UserService;
 import com.tasktracker.springboottaskapp.dtos.UserDto;
 import com.tasktracker.springboottaskapp.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;

@@ -1,48 +1,25 @@
 package com.tasktracker.springboottaskapp.services;
 
-import com.tasktracker.springboottaskapp.entities.TodoItem;
-import com.tasktracker.springboottaskapp.repositories.TodoItemRepository;
 
-import com.tasktracker.springboottaskapp.repositories.UserRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
+import com.tasktracker.springboottaskapp.dtos.TodoDto;
+import org.springframework.transaction.annotation.Transactional;
 
-@Service
-public class TodoService<TodoItems> {
-    @Autowired
-    private UserRepository userRepository;
-    @Autowired
-    private TodoItemRepository todoItemRepository;
+import java.util.List;
+import java.util.Optional;
 
-    @GetMapping("/create-todo")
-    public String showCreateForm(TodoItems todoItem){
-        return "add-todo-item";
-    }
+public interface TodoService {
+    @Transactional
+    void addTodoItem(TodoDto todoDto, Long userId);
 
-    @GetMapping("/edit/{id}")
-    public String showUpdateForm(@PathVariable("id") long id, Model model) {
-        TodoItem todoItem = todoItemRepository
-                .findById(id)
-                .orElseThrow(() -> new IllegalArgumentException("TodoItem id: " + id + " not found"));
+    @Transactional
+    void updateTodoItemById(TodoDto todoDto);
 
-        model.addAttribute("todo", todoItem);
-        return "update-todo-item";
-    }
+    List<TodoDto> getAllTodoItemByUserId(Long userId);
 
-    @GetMapping("/delete/{id}")
-    public String deleteTodoItem(@PathVariable("id") long id, Model model) {
-        TodoItem todoItem = todoItemRepository
-                .findById(id)
-                .orElseThrow(() -> new IllegalArgumentException("TodoItem id: " + id + " not found"));
+    Optional<TodoDto> getTodoItemById(Long todoId);
 
-        todoItemRepository.delete(todoItem);
-        return "redirect:/";
-    }
+    @Transactional
+    void deleteTodoItemById(Long todoId);
 
-    public void deleteTodoItemById(Long TodoId) {
-    }
+
 }
-
