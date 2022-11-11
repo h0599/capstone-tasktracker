@@ -5,13 +5,13 @@
   padding: 0;
   box-sizing: border-box;
   font-family: 'Poppins', sans-serif;
-  font-color: rgb(143, 188, 143);
+  font-color: #3b4465;
 }
 body{
   width: 100%;
   height: 100vh;
   overflow: hidden;
-  background: rgb(143, 188, 143);
+  background: #3b4465;
 }
 ::selection{
   color: #fff;

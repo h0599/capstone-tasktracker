@@ -15,21 +15,21 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@RequestMapping ("http://localhost:8080/api/v1/users")
+@RequestMapping ("/api/v1/users")
 public class UserController {
     @Autowired
     private UserService userService;
     @Autowired
     private PasswordEncoder passwordEncoder;
 
-    @PostMapping ("http://localhost:8080/register")
+    @PostMapping ("/register")
     public List<String> addUser(@RequestBody UserDto userDto){
         String passHash = passwordEncoder.encode(userDto.getPassword());
         userDto.setPassword(passHash);
         return userService.addUser(userDto);
     }
 
-    @PostMapping ("http://localhost:8080/login")
+    @PostMapping ("/login")
     public List<String> userLogin(@RequestBody UserDto userDto) {
         return userService.userLogin(userDto);
     }

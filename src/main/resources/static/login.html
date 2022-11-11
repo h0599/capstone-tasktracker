@@ -2,38 +2,65 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Login</title>
-  <link rel="stylesheet" href="styles.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>
+
+  <link rel="stylesheet" href="./css/login.css" type="text/css">
+
+
 </head>
-<body>
-  <div class="wrapper">
-    <header>Login Form</header>
-    <form action="#">
-      <div class="field email">
-        <div class="input-area">
-          <input type="text" placeholder="Email Address">
-          <i class="icon fas fa-envelope"></i>
-          <i class="error error-icon fas fa-exclamation-circle"></i>
-        </div>
-        <div class="error error-txt">Email can't be blank</div>
-      </div>
-      <div class="field password">
-        <div class="input-area">
-          <input type="password" placeholder="Password">
-          <i class="icon fas fa-lock"></i>
-          <i class="error error-icon fas fa-exclamation-circle"></i>
-        </div>
-        <div class="error error-txt">Password can't be blank</div>
-      </div>
-      <div class="pass-txt"><a href="#">Forgot password?</a></div>
-      <input type="submit" value="Login"><a href="./index.html">
 
-    </form>
+<section class="forms-section">
+  <h1 class="section-title">Task Tracker App</h1>
+  <div class="forms">
+    <div class="form-wrapper is-active">
+      <button type="button" class="switcher switcher-login">
+        Login
+        <span class="underline"></span>
+      </button>
+      <form class="form form-login">
+        <fieldset>
+          <legend>Please, enter your email and password for login.</legend>
+          <div class="input-block">
+            <label for="login-email">E-mail</label>
+            <input id="login-email" type="email" required>
+          </div>
+          <div class="input-block">
+            <label for="login-password">Password</label>
+            <input id="login-password" type="password" required>
+          </div>
+        </fieldset>
+        <button type="submit" class="btn-login">Login</button>
+      </form>
+    </div>
+    <div class="form-wrapper">
+      <button type="button" class="switcher switcher-signup">
+        Sign Up
+        <span class="underline"></span>
+      </button>
+      <form class="form form-signup">
+        <fieldset>
+          <legend>Please, enter your email, password and password confirmation for sign up.</legend>
+          <div class="input-block">
+            <label for="register-email">E-mail</label>
+            <input id="register-email" type="email" required>
+          </div>
+          <div class="input-block">
+            <label for="register-password">Password</label>
+            <input id="register-password" type="password" required>
+          </div>
+          <div class="input-block">
+            <label for="register-password-confirm">Confirm password</label>
+            <input id="register-password-confirm" type="password" required>
+          </div>
+        </fieldset>
+        <button id= type="submit" class="btn-signup">Continue</button>
+      </form>
+    </div>
   </div>
+</section>
 
-  <script src="login.js"></script>
 
+
+<script src="./javascript/login.js" type="application/javascript"></script>
 </body>
 </html>
